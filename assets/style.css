@@ -1,0 +1,187 @@
+body,
+html {
+  margin: 0;
+  background: #000;
+  font-size: 24px;
+}
+body * {
+  box-sizing: border-box;
+}
+canvas {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.login {
+  width: 600px;
+  margin: 20% auto 0;
+  padding: 20px 10px;
+  border: 1px solid #0f0;
+  text-align: center;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.9);
+  display: none;
+}
+.login input {
+  padding: 10px;
+  background: transparent;
+  outline: none;
+  display: block;
+  margin: 10px auto 0;
+  border: 0;
+  color: #0f0;
+  font-size: 24px;
+  text-align: center;
+}
+.login .button {
+  padding: 0 30px;
+  height: 30px;
+  line-height: 30px;
+  margin: 30px 0 20px;
+  font-size: 16px;
+  color: #0f0;
+  border: 1px solid #0f0;
+  border-radius: 999px;
+  display: inline-block;
+  transition: 0.3s;
+}
+.login .button:hover {
+  background: #00f7ff;
+  color: #000;
+  border-color: #00f7ff;
+}
+.center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 960px;
+  margin-left: -480px;
+}
+.content {
+  border: 1px solid #0f0;
+  position: absolute;
+  top: 20px;
+  bottom: 250px;
+  width: 100%;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.9);
+  color: #0f0;
+}
+.content .message-box {
+  text-align: center;
+  font-size: 14px;
+  height: 40px;
+  line-height: 40px;
+}
+.content .left,
+.content .right {
+  overflow: hidden;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+.content .left .avatar,
+.content .right .avatar {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 20px;
+  background: #0f0;
+  color: #000;
+  border-radius: 999px;
+  user-select: none;
+}
+.content .left .name,
+.content .right .name {
+  line-height: 40px;
+  margin: 0 10px;
+}
+.content .left .text,
+.content .right .text {
+  padding: 10px;
+  border: 1px solid #0f0;
+  border-radius: 10px;
+  max-width: 50%;
+}
+.content .left {
+  text-align: left;
+}
+.content .left * {
+  float: left;
+}
+.content .right {
+  text-align: right;
+}
+.content .right * {
+  float: right;
+}
+.sender {
+  position: absolute;
+  bottom: 0;
+  height: 210px;
+  width: 100%;
+}
+.sender textarea {
+  width: 70%;
+  height: 100%;
+  float: left;
+  border: 1px solid #0f0;
+  border-bottom: 0;
+  background: transparent;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  resize: none;
+  outline: none;
+  padding: 20px;
+  color: #0f0;
+  font-size: 18px;
+  background: rgba(0,0,0,0.9);
+}
+.sender textarea:focus {
+  border-color: #00f7ff;
+  color: #00f7ff;
+}
+.sender .right {
+  float: right;
+  position: relative;
+}
+.sender .right .button {
+  position: absolute;
+  right: 0;
+  width: 210px;
+  height: 210px;
+  border: 10px solid #0f0;
+  border-bottom: 0;
+  border-top-right-radius: 999px;
+  border-top-left-radius: 999px;
+  background: rgba(0,0,0,0.9);
+  transition: border-color 1s, opacity 0.1s;
+}
+.sender .right .button:hover {
+  border-color: #00f7ff;
+}
+.sender .right .button-inner {
+  position: absolute;
+  right: 0;
+  height: 170px;
+  width: 170px;
+  line-height: 170px;
+  margin: 20px 20px 0;
+  background: #0f0;
+  color: #000;
+  font-size: 38px;
+  text-align: center;
+  border-radius: 9999px;
+  transition: 0.2s;
+  user-select: none;
+}
+.sender .right .button-inner:active {
+  background-color: #ff6b6b;
+  height: 160px;
+  width: 160px;
+  line-height: 160px;
+  margin: 25px 25px 0;
+}

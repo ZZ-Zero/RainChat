@@ -1,0 +1,163 @@
+// out: style.css
+$green = #00ff00
+$blue = #00f7ff
+$red = #ff6b6b
+$bgColor = rgba(0,0,0,.9)
+body,html
+  margin 0
+  background #000
+  font-size 24px
+body *
+  box-sizing border-box
+canvas
+  position fixed
+  top 0
+  bottom 0
+  left 0
+  right 0
+.login
+  width 600px
+  margin 20% auto 0
+  padding 20px 10px
+  border 1px solid $green
+  text-align center
+  border-radius 20px
+  background $bgColor
+  display none
+  input
+    padding 10px
+    background transparent
+    outline none
+    display block
+    margin 10px auto 0
+    border 0
+    color $green
+    font-size 24px
+    text-align center
+  .button
+    padding 0 30px
+    height 30px
+    line-height @height
+    margin 30px 0 20px
+    font-size 16px
+    color $green
+    border 1px solid $green
+    border-radius 999px
+    display inline-block
+    transition .3s
+    &:hover
+      background $blue
+      color #000
+      border-color $blue
+.center
+  position absolute
+  top 0
+  bottom 0
+  left 50%
+  width 960px
+  margin-left -(@width/2)
+  // display none
+.content
+  border 1px solid $green
+  position absolute
+  top 20px
+  bottom 250px
+  width 100%
+  border-radius 10px
+  background $bgColor
+  color $green
+  .message-box
+    text-align center
+    font-size 14px
+    height 40px
+    line-height @height
+  .left, .right
+    overflow hidden
+    padding 10px 20px
+    font-size 16px
+    .avatar
+      height 40px
+      width @height
+      line-height @height
+      text-align center
+      font-size 20px
+      background $green
+      color black
+      border-radius 999px
+      user-select none
+    .name
+      line-height 40px
+      margin 0 10px
+    .text
+      padding 10px
+      border 1px solid $green
+      border-radius 10px
+      max-width 50%
+  .left
+    text-align left
+    *
+      float left
+  .right
+    text-align right
+    *
+      float right
+.sender
+  position absolute
+  bottom 0
+  height 210px
+  width 100%
+  textarea
+    width 70%
+    height 100%
+    float left
+    border 1px solid $green
+    border-bottom 0
+    background transparent
+    border-top-left-radius 10px
+    border-top-right-radius 10px
+    resize none
+    outline none
+    padding 20px
+    color $green
+    font-size 18px
+    background $bgColor
+    &:focus
+      border-color $blue
+      color $blue
+  .right
+    // width 30%
+    float right
+    position relative
+    .button
+      position absolute
+      right 0
+      width @height
+      height @width
+      border 10px solid $green
+      border-bottom 0
+      border-top-right-radius 999px
+      border-top-left-radius 999px
+      background $bgColor
+      transition border-color 1s, opacity .1s
+      &:hover
+        border-color $blue
+    .button-inner
+      position absolute
+      right 0
+      height @height - 40px
+      width @height
+      line-height @height
+      margin 20px 20px 0
+      background $green
+      color black
+      font-size 38px
+      text-align center
+      border-radius 9999px
+      transition .2s
+      user-select none
+      &:active
+        background-color $red
+        height @height - 10px
+        width @height
+        line-height @height
+        margin 25px 25px 0
