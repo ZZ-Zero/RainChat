@@ -2,6 +2,10 @@ $(function(){
   var socket = io.connect()
 
   var index = {
+    data: {
+      nickName: '',
+      scroll: ''
+    },
     init: function () {
       this.canvasBg()
       this.bindEvent()
@@ -36,7 +40,7 @@ $(function(){
       	ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       	ctx.fillRect(0, 0, c.width, c.height);
 
-      	ctx.fillStyle = "#0F0"; //green text
+      	ctx.fillStyle = "#018301"; //green text
       	ctx.font = font_size + "px arial";
       	//looping over drops
       	for(var i = 0; i < drops.length; i++)
@@ -64,15 +68,72 @@ $(function(){
       ctx.fillStyle = color
     },
     bindEvent: function () {
+      let that = this
+
+      $('.login input').keydown(function (e) {
+        if(e.keyCode == 13){
+           $('#login').click()
+        }
+      })
+
+      $('textarea').keydown(function (e) {
+        if(e.keyCode == 13 && e.ctrlKey){
+           $('#sendButton').click()
+        }
+      })
+
       $('#login').click(function () {
         var name = $('.login input').val()
         socket.emit('login', name)
         console.log(name)
+        that.data.nickName = name
+      })
+
+      $('#sendButton').click(function () {
+        let msg = $('#sendTextarea').val()
+        if (!msg) return
+
+        var html = '<div class="right">\
+            <div class="user">\
+              <div class="avatar">'+that.data.nickName.slice(0, 1)+'</div>\
+              <div class="name">'+that.data.nickName+'</div>\
+            </div>\
+            <div class="text">'+msg+'</div>\
+          </div>'
+
+        socket.emit('msg', msg)
+        $('#content').append(html)
+        $('#content').scrollTop($('#content')[0].scrollHeight)
+        $('#sendTextarea').val('')
       })
 
       socket.on('loginSuccess', function () {
         $('.login').fadeOut()
         $('.center').fadeIn()
+      })
+
+      socket.on('system', function (data) {
+        var html = '<div class="message-box">'+data+'</div>'
+        $('#content').append(html)
+        $('#content').scrollTop($('#content')[0].scrollHeight)
+      })
+
+      socket.on('disconnect', function (data) {
+        var html = '<div class="message-box">'+data+'</div>'
+        $('#content').append(html)
+        $('#content').scrollTop($('#content')[0].scrollHeight)
+      })
+
+      socket.on('msg', function (data) {
+        var html = '<div class="left">\
+            <div class="user">\
+              <div class="avatar">'+data.name.slice(0, 1)+'</div>\
+              <div class="name">'+data.name+'</div>\
+            </div>\
+            <div class="text">'+data.data+'</div>\
+          </div>'
+        $('#content').append(html)
+        $('#content').scrollTop($('#content')[0].scrollHeight)
       })
     }
   }

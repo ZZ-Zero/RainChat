@@ -34,6 +34,7 @@ io.on('connection', function (socket) {
     socket.broadcast.emit('msg', sendMsg)
   })
   socket.on('disconnect', function () {
+    if (!socket.nickName) return
     io.sockets.emit('system', socket.nickName + '离开了房间')
   })
 })
