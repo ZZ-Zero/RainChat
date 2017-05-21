@@ -70,6 +70,9 @@ canvas
   padding 40px 20px
   overflow scroll
   color $green
+  &::-webkit-scrollbar {
+    display none
+  }
   .message-box
     text-align center
     font-size 14px
@@ -97,6 +100,11 @@ canvas
       border 1px solid $green
       border-radius 10px
       max-width 50%
+    .img
+      border 1px solid $green
+      padding 10px
+      border-radius 10px
+      max-width 30%
   .left
     text-align left
     *
@@ -142,9 +150,13 @@ canvas
       border-top-right-radius 999px
       border-top-left-radius 999px
       background $bgColor
-      transition border-color 1s, opacity .1s
+      opacity .3
+      transition border-color 1s, opacity 1s
       &:hover
+        opacity 1
+      &.active
         border-color $blue
+        animation imgUpdate 2s infinite
     .button-inner
       position absolute
       right 0
@@ -165,3 +177,9 @@ canvas
         width @height
         line-height @height
         margin 25px 25px 0
+
+  @keyframes imgUpdate {
+    0% {opacity: .3}
+    50% {opacity: 1}
+    100% {opacity: .3}
+  }

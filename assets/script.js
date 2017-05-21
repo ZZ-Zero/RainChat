@@ -134,6 +134,16 @@ $(function(){
           </div>'
         $('#content').append(html)
         $('#content').scrollTop($('#content')[0].scrollHeight)
+
+        if(window.Notification && Notification.permission !== "denied") {
+        	Notification.requestPermission(function(status) {
+        		var n = new Notification('RainChat', {
+              body: data.name+' : '+data.data,
+              icon: './assets/logo.png'
+            });
+        	});
+        }
+
       })
     }
   }

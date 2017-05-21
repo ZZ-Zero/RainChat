@@ -74,6 +74,9 @@ canvas {
   overflow: scroll;
   color: #0f0;
 }
+.content::-webkit-scrollbar {
+  display: none;
+}
 .content .message-box {
   text-align: center;
   font-size: 14px;
@@ -109,6 +112,13 @@ canvas {
   border: 1px solid #0f0;
   border-radius: 10px;
   max-width: 50%;
+}
+.content .left .img,
+.content .right .img {
+  border: 1px solid #0f0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 30%;
 }
 .content .left {
   text-align: left;
@@ -162,10 +172,15 @@ canvas {
   border-top-right-radius: 999px;
   border-top-left-radius: 999px;
   background: rgba(0,0,0,0.9);
-  transition: border-color 1s, opacity 0.1s;
+  opacity: 0.3;
+  transition: border-color 1s, opacity 1s;
 }
 .sender .right .button:hover {
+  opacity: 1;
+}
+.sender .right .button.active {
   border-color: #00f7ff;
+  animation: imgUpdate 2s infinite;
 }
 .sender .right .button-inner {
   position: absolute;
@@ -188,4 +203,48 @@ canvas {
   width: 160px;
   line-height: 160px;
   margin: 25px 25px 0;
+}
+@-moz-keyframes imgUpdate {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+@-webkit-keyframes imgUpdate {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+@-o-keyframes imgUpdate {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+@keyframes imgUpdate {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
 }
