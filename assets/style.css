@@ -116,9 +116,10 @@ canvas {
 .content .left .img,
 .content .right .img {
   border: 1px solid #0f0;
-  padding: 10px;
+  padding: 2px;
   border-radius: 10px;
   max-width: 30%;
+  background: #fff;
 }
 .content .left {
   text-align: left;
@@ -181,6 +182,9 @@ canvas {
 .sender .right .button.active {
   border-color: #00f7ff;
   animation: imgUpdate 2s infinite;
+}
+.sender .right .input-img {
+  display: none;
 }
 .sender .right .button-inner {
   position: absolute;

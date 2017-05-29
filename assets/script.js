@@ -9,6 +9,7 @@ $(function(){
     init: function () {
       this.canvasBg()
       this.bindEvent()
+      this.sendImgEvent()
     },
     canvasBg: function () {
       var c = $('#canvasBg')[0]
@@ -68,7 +69,9 @@ $(function(){
       ctx.fillStyle = color
     },
     bindEvent: function () {
-      let that = this
+      var that = this
+
+      // window.onresize = function () {that.canvasBg()}
 
       $('.login input').keydown(function (e) {
         if(e.keyCode == 13){
@@ -89,8 +92,12 @@ $(function(){
         that.data.nickName = name
       })
 
+      $('#imgButton').click(function () {
+        $('#inputImg').click()
+      })
+
       $('#sendButton').click(function () {
-        let msg = $('#sendTextarea').val()
+        var msg = $('#sendTextarea').val()
         if (!msg) return
 
         var html = '<div class="right">\
@@ -143,7 +150,122 @@ $(function(){
             });
         	});
         }
+      })
 
+      socket.on('img', function (data) {
+        var html = '<div class="left">\
+            <div class="user">\
+              <div class="avatar">'+data.name.slice(0, 1)+'</div>\
+              <div class="name">'+data.name+'</div>\
+            </div>\
+            <img src="'+data.img+'" alt="img-msg" class="img" />\
+          </div>'
+        $('#content').append(html)
+        $('#content').scrollTop($('#content')[0].scrollHeight)
+
+        if(window.Notification && Notification.permission !== "denied") {
+        	Notification.requestPermission(function(status) {
+        		var n = new Notification('RainChat', {
+              body: data.name+' : '+data.imgName,
+              icon: './assets/logo.png'
+            });
+        	});
+        }
+      })
+    },
+    sendImgEvent: function () {
+      var that = this
+      $(document).on({
+        dragleave:function(e){        //拖离
+            e.preventDefault()
+        },
+        drop:function(e){            //拖后放
+            e.preventDefault()
+        },
+        dragenter:function(e){        //拖进
+            e.preventDefault()
+        },
+        dragover:function(e){        //拖来拖去
+            e.preventDefault()
+        }
+      })
+
+      var inputBox = $('#imgButton')
+      inputBox.on('drop', function (e) {
+
+    	  e.stopPropagation();
+    	  e.preventDefault();
+
+        var dt = e.dataTransfer || (e.originalEvent && e.originalEvent.dataTransfer);
+        var fileList = e.target.files || (dt && dt.files);
+        var filesize = Math.floor((fileList[0].size)/1024);
+        //检测是否是拖拽文件到页面的操作
+        if(fileList.length !== 1){
+          return false;
+        }
+        if (fileList[0].type.indexOf('image') === -1) {
+          alert("只能发送图片哟=w=")
+          return false;
+        }
+        if (filesize > 500) {
+          alert("图片大小不能超过500K啦 _(:з)∠)_")
+          return false;
+        }
+        var reader = new FileReader()
+        reader.onload = function (e) {
+          var html = '<div class="right">\
+              <div class="user">\
+                <div class="avatar">'+that.data.nickName.slice(0, 1)+'</div>\
+                <div class="name">'+that.data.nickName+'</div>\
+              </div>\
+              <img src="'+e.target.result+'" alt="img-msg" class="img" />\
+            </div>'
+
+          $('#content').append(html)
+          $('#content').scrollTop($('#content')[0].scrollHeight)
+
+          socket.emit('img', {
+            img: e.target.result,
+            imgName: fileList[0].name
+          });
+        }
+        reader.readAsDataURL(fileList[0])
+      })
+
+      $('body').on('change', '#inputImg', function () {
+        if (this.files.length !== 0) {
+          var file = this.files[0]
+          var filesize = Math.floor((fileList[0].size)/1024);
+          if (file.type.indexOf('image') === -1) {
+            alert("只能发送图片哟=w=")
+            return false;
+          }
+          if (filesize > 500) {
+            alert("图片大小不能超过500K啦 _(:з)∠)_")
+            return false;
+          }
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            var html = '<div class="right">\
+                <div class="user">\
+                  <div class="avatar">'+that.data.nickName.slice(0, 1)+'</div>\
+                  <div class="name">'+that.data.nickName+'</div>\
+                </div>\
+                <img src="'+e.target.result+'" alt="img-msg" class="img" />\
+              </div>'
+
+            $('#content').append(html)
+            $('#content').scrollTop($('#content')[0].scrollHeight)
+
+            socket.emit('img', {
+              img: e.target.result,
+              imgName: file.name
+            });
+            $('#inputImg')[0].outerHtml = '<input type="file" id="inputImg" class="input-img" />'
+          }
+          reader.readAsDataURL(file);
+        };
       })
     }
   }

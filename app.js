@@ -33,6 +33,15 @@ io.on('connection', function (socket) {
     }
     socket.broadcast.emit('msg', sendMsg)
   })
+  socket.on('img', function (data) {
+    console.log(data)
+    let sendMsg = {
+      name: socket.nickName,
+      img: data.img,
+      imgName: data.imgName
+    }
+    socket.broadcast.emit('img', sendMsg)
+  })
   socket.on('disconnect', function () {
     if (!socket.nickName) return
     io.sockets.emit('system', socket.nickName + '离开了房间')
