@@ -235,7 +235,7 @@ $(function(){
       $('body').on('change', '#inputImg', function () {
         if (this.files.length !== 0) {
           var file = this.files[0]
-          var filesize = Math.floor((fileList[0].size)/1024);
+          var filesize = Math.floor((file.size)/1024);
           if (file.type.indexOf('image') === -1) {
             alert("只能发送图片哟=w=")
             return false;
