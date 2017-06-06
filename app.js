@@ -1,4 +1,5 @@
 let express = require('express');
+let xss = require('xss');
 let app = express()
 let path = require('path')
 // let bodyParser = require('body-parser')
@@ -21,24 +22,24 @@ io.on('connection', function (socket) {
   console.log(socket.id)
   let socketId = socket.id
   socket.on('login', function (nickName) {
-    socket.nickName = nickName
+    socket.nickName = xss(nickName)
     socket.emit('loginSuccess')
-    io.sockets.emit('system', nickName + '加入了房间')
+    io.sockets.emit('system', xss(nickName) + '加入了房间')
   })
   socket.on('msg', function (data) {
-    console.log(data)
+    console.log(xss(data))
     let sendMsg = {
-      name: socket.nickName,
-      data: data
+      name: xss(socket.nickName),
+      data: xss(data)
     }
     socket.broadcast.emit('msg', sendMsg)
   })
   socket.on('img', function (data) {
     console.log(data)
     let sendMsg = {
-      name: socket.nickName,
-      img: data.img,
-      imgName: data.imgName
+      name: xss(socket.nickName),
+      img: xss(data.img),
+      imgName: xss(data.imgName)
     }
     socket.broadcast.emit('img', sendMsg)
   })
