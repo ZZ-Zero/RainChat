@@ -86,7 +86,7 @@ $(function(){
       })
 
       $('#login').click(function () {
-        var name = $('.login input').val()
+        var name = filterXSS($('.login input').val())
         socket.emit('login', name)
         console.log(name)
         that.data.nickName = name
@@ -97,7 +97,7 @@ $(function(){
       })
 
       $('#sendButton').click(function () {
-        var msg = $('#sendTextarea').val()
+        var msg = filterXSS($('#sendTextarea').val())
         if (!msg) return
 
         var html = '<div class="right">\
