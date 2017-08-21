@@ -28,12 +28,11 @@ io.on('connection', function (socket) {
     serverMethod.getHistory((err, reply) => {
       if (err) {
         console.log(err)
-        return false
       } if (reply) {
         socket.emit('history', JSON.parse(reply))
       }
+      io.sockets.emit('system', xss(nickName) + '加入了房间')
     })
-    io.sockets.emit('system', xss(nickName) + '加入了房间')
   })
   socket.on('msg', function (data) {
     console.log(xss(data))
