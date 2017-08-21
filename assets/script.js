@@ -172,6 +172,33 @@ $(function(){
         	});
         }
       })
+      socket.on('history', function (data) {
+          console.log(data)
+        let html = ''
+        for (var i = 0; i < data.length; i++) {
+          var temp = data[i];
+          if (temp.type === 'msg') {
+            html += '<div class="left">\
+              <div class="user">\
+                <div class="avatar">'+temp.name.slice(0, 1)+'</div>\
+                <div class="name">'+temp.name+'</div>\
+              </div>\
+              <div class="text">'+temp.data+'</div>\
+            </div>'
+          } else {
+            html += '<div class="left">\
+              <div class="user">\
+                <div class="avatar">'+temp.name.slice(0, 1)+'</div>\
+                <div class="name">'+temp.name+'</div>\
+              </div>\
+              <img src="'+temp.img+'" alt="img-msg" class="img" />\
+            </div>'
+          }
+        }
+        $('#content').append(html)
+        $('#content').scrollTop($('#content')[0].scrollHeight)
+      })
+      
     },
     sendImgEvent: function () {
       var that = this

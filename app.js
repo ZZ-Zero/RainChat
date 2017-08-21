@@ -2,6 +2,7 @@ let express = require('express');
 let xss = require('xss');
 let app = express()
 let path = require('path')
+let serverMethod = require('./server/history_chat.js')
 // let bodyParser = require('body-parser')
 // let cookieParser = require('cookie-parser')
 
@@ -24,6 +25,14 @@ io.on('connection', function (socket) {
   socket.on('login', function (nickName) {
     socket.nickName = xss(nickName)
     socket.emit('loginSuccess')
+    serverMethod.getHistory((err, reply) => {
+      if (err) {
+        console.log(err)
+        return false
+      } if (reply) {
+        socket.emit('history', JSON.parse(reply))
+      }
+    })
     io.sockets.emit('system', xss(nickName) + '加入了房间')
   })
   socket.on('msg', function (data) {
@@ -32,6 +41,11 @@ io.on('connection', function (socket) {
       name: xss(socket.nickName),
       data: xss(data)
     }
+    serverMethod.setHistory({
+      type: 'msg',
+      name: sendMsg.name,
+      data: sendMsg.data
+    })
     socket.broadcast.emit('msg', sendMsg)
   })
   socket.on('img', function (data) {
@@ -41,6 +55,12 @@ io.on('connection', function (socket) {
       img: xss(data.img),
       imgName: xss(data.imgName)
     }
+    serverMethod.setHistory({
+      type: 'img',
+      name: sendMsg.name,
+      img: sendMsg.img,
+      imgName: sendMsg.imgName
+    })
     socket.broadcast.emit('img', sendMsg)
   })
   socket.on('disconnect', function () {
