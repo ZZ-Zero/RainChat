@@ -195,7 +195,7 @@ $(function(){
             </div>'
           }
         }
-        $('#content').append(html)
+        $('#content').append(html+'<div class="message-box">以上为历史消息</div>')
         $('#content').scrollTop($('#content')[0].scrollHeight)
       })
       
