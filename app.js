@@ -71,8 +71,7 @@ io.on('connection', function (socket) {
     if (!socket.nickName) return
 
     for (let i = 0; i < userArr.length; i++) {
-      userArr[i] === socket.nickName
-      userArr.splice(i, 1)
+      if (userArr[i] === socket.nickName) userArr.splice(i, 1)
     }
     io.sockets.emit('userArr', userArr)
 
