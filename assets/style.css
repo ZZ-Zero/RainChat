@@ -247,10 +247,11 @@ canvas {
   .content {
     border-width: 0 0 1px;
     top: 0;
+    bottom: 190px;
     padding: 20px 0px;
   }
   .sender {
-    height: 240px;
+    height: 180px;
   }
   .sender textarea {
     width: 100%;
