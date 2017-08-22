@@ -6,9 +6,15 @@ block content
     .button#login Login
   .center
     #content.content
+    #infoContent.content.none
+      dl.user-list
+        dt 在线用户
     .sender
       textarea#sendTextarea
       .right
-        #imgButton.button Image
+        #menuButton.button Menu
         input(type='file')#inputImg.input-img
-        #sendButton.button-inner Send
+        .button-box
+          #sendButton.button-inner.top Send
+          #imgButton.button-inner.bottom Img
+          

@@ -1,3 +1,6 @@
+.none {
+  display: none;
+}
 body,
 html {
   margin: 0;
@@ -77,8 +80,42 @@ canvas {
   color: #0f0;
   -webkit-overflow-scrolling: touch;
 }
+.content.none {
+  background: #000;
+}
 .content::-webkit-scrollbar {
   display: none;
+}
+.content .user-list {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.content .user-list dt {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.content .user-list dd {
+  overflow: hidden;
+  float: left;
+}
+.content .user-list dd > * {
+  float: left;
+}
+.content .user-list dd .avatar {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 20px;
+  background: #0f0;
+  color: #000;
+  border-radius: 999px;
+  user-select: none;
+}
+.content .user-list dd .name {
+  line-height: 40px;
+  margin: 0 10px;
 }
 .content .message-box {
   text-align: center;
@@ -189,27 +226,37 @@ canvas {
 .sender .right .input-img {
   display: none;
 }
-.sender .right .button-inner {
-  position: absolute;
-  right: 0;
-  height: 170px;
+.sender .right .button-box {
   width: 170px;
-  line-height: 170px;
-  margin: 20px 20px 0;
+  height: 170px;
+  position: relative;
+  top: 20px;
+  right: 20px;
+}
+.sender .right .button-inner {
+  width: 170px;
+  height: 83px;
+  line-height: 103px;
+  margin-bottom: 4px;
   background: #0f0;
   color: #000;
   font-size: 38px;
   text-align: center;
-  border-radius: 9999px;
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
   transition: 0.2s;
   user-select: none;
 }
+.sender .right .button-inner.bottom {
+  line-height: 63px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  background: #00f7ff;
+}
 .sender .right .button-inner:active {
   background-color: #ff6b6b;
-  height: 160px;
-  width: 160px;
-  line-height: 160px;
-  margin: 25px 25px 0;
 }
 @media (max-width: 700px) {
   .login {
@@ -281,19 +328,31 @@ canvas {
     right: auto;
     bottom: 0;
     height: 100%;
-    width: 50%;
+    width: 20%;
     border: 0;
     background: rgba(0,247,255,0.72);
     text-align: center;
     font-size: 18px;
     opacity: 1;
     border-radius: 0;
+    color: #fff;
   }
   .sender .right .button:hover {
     opacity: 1;
   }
   .sender .right .button:active {
     background-color: rgba(255,107,107,0.72);
+  }
+  .sender .right .button-box {
+    width: auto;
+    height: auto;
+    position: static;
+    top: 0;
+    right: 0;
+    margin-left: 20%;
+  }
+  .sender .right .button-box > * {
+    float: right;
   }
   .sender .right .button-inner {
     line-height: 50px;
@@ -305,6 +364,11 @@ canvas {
     bottom: 0;
     background: rgba(0,255,0,0.72);
     color: #fff;
+  }
+  .sender .right .button-inner.bottom {
+    border-radius: 0;
+    line-height: 50px;
+    background: rgba(255,107,107,0.72);
   }
   .sender .right .button-inner:active {
     height: 100%;

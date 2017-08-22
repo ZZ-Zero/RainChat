@@ -118,6 +118,10 @@ $(function(){
         $('#sendTextarea').val('')
       })
 
+      $('#menuButton').click(function () {
+        $('#infoContent').fadeToggle()
+      })
+
       socket.on('loginSuccess', function () {
         $('.login').fadeOut()
         $('.center').fadeIn()
@@ -177,7 +181,6 @@ $(function(){
         }
       })
       socket.on('history', function (data) {
-          console.log(data)
         let html = ''
         for (var i = 0; i < data.length; i++) {
           var temp = data[i];
@@ -201,6 +204,15 @@ $(function(){
         }
         $('#content').append(html+'<div class="message-box">---以上为历史消息---</div>')
         $('#content').scrollTop($('#content')[0].scrollHeight)
+      })
+      socket.on('userArr', function (data) {
+        var html = ''
+        for (var i = 0; i < data.length; i++) {
+          var temp = data[i]
+          html += '<dd><div class="avatar">'+temp.slice(0,1)+'</div><div class="name">'+temp+'</div></dd>'
+        }
+
+        $('#infoContent .user-list').append(html)
       })
 
     },

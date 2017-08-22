@@ -12,6 +12,8 @@ let server = app.listen(3000, function () {
 
 let io = require('socket.io').listen(server)
 
+let userArr = []
+
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
 
@@ -21,9 +23,12 @@ app.use('/assets', express.static(path.join(__dirname, '/assets')))
 
 io.on('connection', function (socket) {
   console.log(socket.id)
-  let socketId = socket.id
   socket.on('login', function (nickName) {
     socket.nickName = xss(nickName)
+
+    userArr.push(socket.nickName)
+    io.sockets.emit('userArr', userArr)
+
     socket.emit('loginSuccess')
     serverMethod.getHistory((err, reply) => {
       if (err) {
@@ -64,24 +69,31 @@ io.on('connection', function (socket) {
   })
   socket.on('disconnect', function () {
     if (!socket.nickName) return
+
+    for (let i = 0; i < userArr.length; i++) {
+      userArr[i] === socket.nickName
+      userArr.splice(i)
+    }
+    io.sockets.emit('userArr', userArr)
+
     io.sockets.emit('system', socket.nickName + ' 离开了房间')
   })
 })
 
 app.get('/', function (req, res) {
-  res.render('chat')
+res.render('chat')
 })
 
 app.use(function (req, res, next) {
-  let err = new Error('Not Found');
-  err.status = 404
-  next(err)
+let err = new Error('Not Found');
+err.status = 404
+next(err)
 })
 
 app.use(function (err, req, res, next) {
-  res.status(err.status || 500)
-  res.render('error', {
-    message: err.message,
-    error: {}
-  })
+res.status(err.status || 500)
+res.render('error', {
+message: err.message,
+error: {}
+})
 })

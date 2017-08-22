@@ -33,7 +33,6 @@ getHistory((err, reply) => {
     return false
   }
   if (reply) {
-    console.log(reply)
     historyArray = JSON.parse(reply)
   }
 })
