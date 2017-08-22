@@ -75,6 +75,7 @@ canvas {
   padding: 40px 20px;
   overflow: scroll;
   color: #0f0;
+  -webkit-overflow-scrolling: touch;
 }
 .content::-webkit-scrollbar {
   display: none;
@@ -117,7 +118,6 @@ canvas {
 }
 .content .left .img,
 .content .right .img {
-  border: 1px solid #0f0;
   padding: 2px;
   border-radius: 10px;
   max-width: 30%;
@@ -177,7 +177,7 @@ canvas {
   border-top-left-radius: 999px;
   background: rgba(0,0,0,0.9);
   opacity: 0.3;
-  transition: border-color 1s, opacity 1s;
+  transition: border-color 1s, opacity 1s, background 0.2s;
 }
 .sender .right .button:hover {
   opacity: 1;
@@ -225,6 +225,7 @@ canvas {
   }
   .login input {
     margin-top: 50%;
+    width: 80%;
     background: rgba(0,247,255,0.14);
   }
   .login .button {
@@ -256,49 +257,60 @@ canvas {
     height: auto;
     position: absolute;
     top: 0;
-    bottom: 100px;
+    bottom: 50px;
     float: none;
     border-width: 1px 0 0;
     border-radius: 10px;
     background: transparent;
+    transition: background 0.2s;
+  }
+  .sender textarea:focus {
+    background: rgba(0,0,0,0.9);
   }
   .sender .right {
     float: none;
     position: absolute;
     bottom: 0;
-    height: 100px;
+    height: 50px;
     width: 100%;
   }
   .sender .right .button {
+    line-height: 50px;
     left: 0;
     right: auto;
     bottom: 0;
-    height: 80px;
+    height: 100%;
     width: 50%;
-    border: 1px solid #0f0;
-    font-size: 24px;
+    border: 0;
+    background: rgba(0,247,255,0.72);
+    text-align: center;
+    font-size: 18px;
     opacity: 1;
-    line-height: 80px;
     border-radius: 0;
   }
   .sender .right .button:hover {
     opacity: 1;
   }
-  .sender .right .button.active {
-    border-color: #00f7ff;
-    animation: none;
+  .sender .right .button:active {
+    background-color: rgba(255,107,107,0.72);
   }
   .sender .right .button-inner {
-    height: 80px;
-    font-size: 24px;
+    line-height: 50px;
+    height: 100%;
+    width: 50%;
+    font-size: 18px;
     border-radius: 0;
     margin: 0;
-    line-height: 80px;
+    bottom: 0;
+    background: rgba(0,255,0,0.72);
+    color: #fff;
   }
   .sender .right .button-inner:active {
-    height: auto;
-    width: auto;
-    line-height: auto;
+    height: 100%;
+    width: 50%;
+    line-height: 50px;
+    margin: 0;
+    background-color: rgba(255,107,107,0.72);
   }
 }
 @-moz-keyframes imgUpdate {

@@ -31,7 +31,7 @@ io.on('connection', function (socket) {
       } if (reply) {
         socket.emit('history', JSON.parse(reply))
       }
-      io.sockets.emit('system', xss(nickName) + '加入了房间')
+      io.sockets.emit('system', xss(nickName) + ' 加入了房间')
     })
   })
   socket.on('msg', function (data) {
@@ -64,7 +64,7 @@ io.on('connection', function (socket) {
   })
   socket.on('disconnect', function () {
     if (!socket.nickName) return
-    io.sockets.emit('system', socket.nickName + '离开了房间')
+    io.sockets.emit('system', socket.nickName + ' 离开了房间')
   })
 })
 

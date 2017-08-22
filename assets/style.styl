@@ -72,6 +72,7 @@ canvas
   padding 40px 20px
   overflow scroll
   color $green
+  -webkit-overflow-scrolling touch
   &::-webkit-scrollbar {
     display none
   }
@@ -103,7 +104,7 @@ canvas
       border-radius 10px
       max-width 50%
     .img
-      border 1px solid $green
+      // border 1px solid $green
       padding 2px
       border-radius 10px
       max-width 30%
@@ -155,7 +156,7 @@ canvas
       border-top-left-radius 999px
       background $bgColor
       opacity .3
-      transition border-color 1s, opacity 1s
+      transition border-color 1s, opacity 1s, background .2s
       &:hover
         opacity 1
       &.active
@@ -197,6 +198,7 @@ canvas
     background-color rgba(0,0,0,.55)
     input
       margin-top 50%
+      width 80%
       background rgba(0, 247, 255, 0.14)
     .button
       margin-top 20%
@@ -223,43 +225,53 @@ canvas
       height auto
       position absolute
       top 0
-      bottom 100px
+      bottom 50px
       float none
       border-width 1px 0 0
       border-radius 10px
       background transparent
+      transition background .2s
+      &:focus
+        background rgba(0,0,0, 0.9)
     .right
       float none
       position absolute
       bottom 0
-      height 100px
+      height 50px
       width 100%
       .button
+        line-height @height
         left 0
         right auto
         bottom 0
-        height 80px
+        height 100%
         width 50%
-        border 1px solid $green
-        font-size 24px
+        border 0
+        background rgba(0, 247, 255, 0.72)
+        text-align center
+        font-size 18px
         opacity 1
-        line-height @height
         border-radius 0
         &:hover
           opacity 1
-        &.active
-          border-color $blue
-          animation none
+        &:active
+          background-color rgba(255, 107, 107, 0.72)
       .button-inner
-        height 80px
-        font-size 24px
+        line-height @height
+        height 100%
+        width 50%
+        font-size 18px
         border-radius 0
         margin 0
-        line-height @height
+        bottom 0
+        background rgba(0, 255, 0, .72)
+        color white
         &:active
-          height auto
-          width auto
-          line-height @height
+          height @height
+          width @width
+          line-height @line-height
+          margin @margin
+          background-color rgba(255, 107, 107, 0.72)
 
 
 @keyframes imgUpdate
