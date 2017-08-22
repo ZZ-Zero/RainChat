@@ -72,7 +72,7 @@ io.on('connection', function (socket) {
 
     for (let i = 0; i < userArr.length; i++) {
       userArr[i] === socket.nickName
-      userArr.splice(i)
+      userArr.splice(i, 1)
     }
     io.sockets.emit('userArr', userArr)
 
