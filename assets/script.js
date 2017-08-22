@@ -212,7 +212,7 @@ $(function(){
           html += '<dd><div class="avatar">'+temp.slice(0,1)+'</div><div class="name">'+temp+'</div></dd>'
         }
 
-        $('#infoContent .user-list').append(html)
+        $('#infoContent .user-list .list-inner').html(html)
       })
 
     },
