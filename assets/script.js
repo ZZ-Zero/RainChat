@@ -4,7 +4,8 @@ $(function(){
   var index = {
     data: {
       nickName: '',
-      scroll: ''
+      scroll: '',
+      bgInterval: ''
     },
     init: function () {
       this.canvasBg()
@@ -61,7 +62,7 @@ $(function(){
       	}
       }
 
-      setInterval(draw, 53);
+      this.data.bgInterval = setInterval(draw, 53);
     },
     bgColor: function (color) {
       var c = $('#canvasBg')[0]
@@ -71,7 +72,10 @@ $(function(){
     bindEvent: function () {
       var that = this
 
-      // window.onresize = function () {that.canvasBg()}
+      window.onresize = function () {
+        clearInterval(that.data.bgInterval)
+        that.canvasBg()
+      }
 
       $('.login input').keydown(function (e) {
         if(e.keyCode == 13){
@@ -198,7 +202,7 @@ $(function(){
         $('#content').append(html+'<div class="message-box">---以上为历史消息---</div>')
         $('#content').scrollTop($('#content')[0].scrollHeight)
       })
-      
+
     },
     sendImgEvent: function () {
       var that = this
