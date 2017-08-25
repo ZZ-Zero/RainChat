@@ -91,6 +91,7 @@ $(function(){
 
       $('#login').click(function () {
         var name = filterXSS($('.login input').val())
+        if (name.replace(/(^\s*)|(\s*$)/g, "").length === 0) return
         socket.emit('login', name)
         console.log(name)
         that.data.nickName = name
